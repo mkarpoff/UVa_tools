@@ -174,9 +174,9 @@ if [ ! -d "$OUTPUT" ]; then
 fi
 
 printf "Program:${BLUE} $EXE${WHITE}\n"
-NUMTESTS=$( ls ${INPUT} | wc -l )
+NUMTESTS=$( /bin/ls -l ${INPUT} | wc -l )
 printf "Num tests: ${RED}$NUMTESTS${WHITE}\n"
-for f in $(ls "$INPUT" ); do
+for f in $(/bin/ls "$INPUT" ); do
 		printf "${TESTBREAK}"
 		TIMEFORMAT="%3R"
 		TIME=$( ( time ( ./$EXE < ${INPUT}${f} > temp ) >&2 ) 2>&1 )
