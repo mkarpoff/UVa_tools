@@ -29,6 +29,7 @@ STAG='.solved.tag'
 ls_wrapper() {
 	OUT=
 	IGN=
+	NL="\n"
 
 	for folder in $(ls); do
 		if [ -d $folder ]; then
@@ -48,6 +49,7 @@ ls_wrapper() {
 			fi
 			if (( $TRIV==0 && $NONT==0 && $SOLV==0));then
 				COLOR=
+				NL=
 			elif (( $TRIV==1 && $NONT==1 && $SOLV==1)); then
 				COLOR=$RED
 			elif (( $TRIV==1 && $SOLV==1 )); then
@@ -65,9 +67,11 @@ ls_wrapper() {
 				IGN=${IGN}"--ignore $folder "
 				OUT=${OUT}$app
 			fi
+		else 
+			NL=
 		fi
 	done
-	printf "${OUT}"
+	printf "${OUT}${NL}"
 	ls $IGN --color $@
 }
 
