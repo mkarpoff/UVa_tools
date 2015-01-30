@@ -1,5 +1,5 @@
 #! /bin/bash
-#  ls_uva v1.2.0
+#  ls_uva v2.0.1
 # 
 #  Copyright (c) 2015 Marcus Karpoff <marcuskarpoff@gmail.com>
 #  
@@ -33,6 +33,8 @@ ls_wrapper() {
 	ISUVA=0
 
 	for folder in $(ls); do
+		folder=$folder
+
 		if [ -d $folder ]; then
 			TRIV=0
 			NONT=0
@@ -64,7 +66,7 @@ ls_wrapper() {
 			fi
 			if [ "$COLOR" != "" ]; then
 				ISUVA=1
-				fline=$(ls $@ | grep $folder)
+				fline=$(ls $@ | grep -x "$folder")
 				app="${COLOR}${fline}${WHITE} "
 				IGN=${IGN}"--ignore $folder "
 				OUT=${OUT}$app
@@ -74,8 +76,7 @@ ls_wrapper() {
 		fi
 	done
 	if (( $ISUVA == 1 )); then
-		printf "${UORANGE}Tivial${ORANGE} Trivial-solved ${UPURPLE}Non-Trivial${PURPLE} Non-Trivial-solved\n"
-		printf "${OUT}${NL}"
+		printf "${OUT}${WHITE}${NL}"
 		ls $IGN --color $@
 	else
 		ls --color
