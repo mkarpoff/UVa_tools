@@ -66,14 +66,13 @@ CombinTAG=".Combinatorics.tag"
 NumberTAG=".NumberTheory.tag"
 BacktrTAG=".Backtracking.tag"
 GraphTTAG=".GraphTraversal.tag"
-GraphATAG=".GraphAlforithms.tag"
+GraphATAG=".GraphAlgorithms.tag"
 DynProTAG=".DynamicProgramming.tag"
 GeometTAG=".Geometry.tag"
 OtherTAG=".Other.tag"
 
 while [[ "$1" != "" ]]; do
 	if [[ "$1" == "--"* ]]; then
-		echo $1
 		case "$1" in
 			--Data-Structures) USE_DataSt=1;;
 			--Strings) USE_String=1;;
@@ -141,29 +140,42 @@ for DIR in $DIRLIST; do
 done
 
 _mark () {
-	ddlist='--Data-Structures \
-				--Strings \
-				--Sorting \
-				--Arithmetic \
-				--Combinatorics \
-				--Number-Theory \
-				--Backtracking \
-				--Graph-Traversal \
-				--Graph-Algorithms \
-				--Dynamic-Programming \
-				--Geometry \
-				--Other \
-				--Trivial \
-				--Non-Trivial \
-				--Solved'
-	local cur
 	COMPREPLY=()
 	cur=${COMP_WORDS[COMP_CWORD]}
 	case "$cur" in
 		--*)
-			COMPREPLY=( $(compgen -W $ddlist-- $cur ) );;
+			COMPREPLY=( $(compgen -W '--Data-Structures \
+																--Strings \
+																--Sorting \
+																--Arithmetic \
+																--Combinatorics \
+																--Number-Theory \
+																--Backtracking \
+																--Graph-Traversal \
+																--Graph-Algorithms \
+																--Dynamic-Programming \
+																--Geometry \
+																--Other \
+																--Trivial \
+																--Non-Trivial \
+																--Solved' -- $cur ) );;
 		-*)
-			COMPREPLY=( $(compgen -W '-t -T -n -N -s -S $ddlist' -- $cur ) );;
+			COMPREPLY=( $(compgen -W '-t -T -n -N -s -S
+																--Data-Structures \
+																--Strings \
+																--Sorting \
+																--Arithmetic \
+																--Combinatorics \
+																--Number-Theory \
+																--Backtracking \
+																--Graph-Traversal \
+																--Graph-Algorithms \
+																--Dynamic-Programming \
+																--Geometry \
+																--Other \
+																--Trivial \
+																--Non-Trivial \
+																--Solved' -- $cur ) );;
 		*)
 			COMPREPLY=( $(compgen -f -- $cur ) );;
 	esac
