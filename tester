@@ -175,6 +175,7 @@ fi
 
 printf "Program:${BLUE} $EXE${WHITE}\n"
 NUMTESTS=$( /bin/ls -l ${INPUT} | wc -l )
+NUMTESTS=$( expr $NUMTESTS - 1)
 printf "Num tests: ${RED}$NUMTESTS${WHITE}\n"
 for f in $(/bin/ls "$INPUT" ); do
 		printf "${TESTBREAK}"
